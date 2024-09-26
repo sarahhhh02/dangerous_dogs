@@ -31,5 +31,3 @@ folder_path <- "/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/d
 
 # change the_raw_data to whatever name you assigned when you downloaded it.
 write_csv(data, file.path(folder_path, "dangerous_dog_raw.csv")) 
-
-
