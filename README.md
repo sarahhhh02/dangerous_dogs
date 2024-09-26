@@ -1,18 +1,16 @@
-# dangerous_dogs
+# Dangerous Dog Analysis in Toronto between 2017-2024
 
 ## Overview
 
-This repo provides students with a foundation for their own projects associated with *Telling Stories with Data*. You do not need every aspect for every paper and you should delete aspects that you do not need.
-
+This repo includes a paper that analyzes data issued by the City of Toronto on registered dogs that are subject to a dangerous dog order. It explores different dog breeds from 2017-2024, focusing on trends based on severity of bites within ward locations and public vs. private settings in Toronto.
 
 ## File Structure
 
 The repo is structured as:
 
--   `data/raw_data` contains the raw data as obtained from X.
--   `data/analysis_data` contains the cleaned dataset that was constructed.
+-   `data` contains the raw data and cleaned dataset obtained from Open Data Toronto
 -   `model` contains fitted models. 
--   `other` contains relevant literature, details about LLM chat interactions, and sketches.
+-   `other/llm` contains relevant literature, details about LLM chat interactions, and sketches.
 -   `paper` contains the files used to generate the paper, including the Quarto document and reference bibliography file, as well as the PDF of the paper. 
 -   `scripts` contains the R scripts used to simulate, download and clean data.
 
@@ -20,7 +18,3 @@ The repo is structured as:
 ## Statement on LLM usage
 
 Aspects of the code were written with the help of the auto-complete tool, Codriver. The abstract and introduction were written with the help of ChatHorse and the entire chat history is available in inputs/llms/usage.txt.
-
-## Some checks
-- [ ] Remove files that you're not using
-- [ ] Update comments in R scripts
