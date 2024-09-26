@@ -29,8 +29,9 @@ cleaned_data <-
     ) |>
   mutate(bite_type = ifelse(bite_type == "NAB", "NOT A BITE", bite_type) #Change rows in bite_type to make sure it has the same words
     ) |>
-  select(year, month, day, Breed, Color, ward, bite_type, location_type, geographic_area, dog_name) #pick out columns that will be used
+  select(year, month, day, Breed, ward, bite_type, location_type, geographic_area) #pick out columns that will be used
  print(cleaned_data)
 
 #### Save data ####
 write_csv(cleaned_data, "/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/data/dangerous_dog_clean.csv")
+ 
