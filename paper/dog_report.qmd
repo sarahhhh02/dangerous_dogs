@@ -17,121 +17,67 @@ bibliography: references.bib
 #| warning: false
 #| message: false
 
+# Load needed libraries
 library(tidyverse)
-library(palmerpenguins)
-```
+library(knitr)
+library(dplyr)
+library(ggplot2)
 
+```
 # Introduction
 
-### Introduction
+Dog bites represent a significant public safety concern, prompting ongoing discussions around breed-specific legislation and responsible pet ownership. As urban areas grow more populated, incidents of dog aggression can lead to serious injuries and heightened fear of certain breeds. However, discussing aggression solely to specific breeds overlooks the complex interplay of factors such as owner behavior, socialization, and environmental influences that contribute to canine aggression. Understanding these dynamics is essential for developing effective interventions that can give better practices and insights for dog ownership and public safety.
 
-Dog bites represent a significant public safety concern, prompting discussions on breed-specific legislation and responsible pet ownership. As urban areas become increasingly populated, incidents of dog aggression can lead to serious injuries and heightened fear of certain breeds. However, discussing aggression solely to specific breeds overlooks the complex interplay of factors such as owner behavior, socialization, and environmental influences that contribute to canine aggression. Understanding these dynamics is essential for providing effective interventions that can give better practices and insights for dog ownership and public safety.
+This study investigates reported data on dog attack incidents from 2017 to 2024, analyzing the severity of attacks across different breeds and tracking trends over the years. We also investigate the geographic distribution of incidents, examining the number of attacks reported in various ward areas, while also comparing incidents occurring in public versus private spaces. By discerning patterns from this data aim to inform future approaches to dog ownership and public policy. A notable gap in existing research is the overemphasis on breed as a determinant of aggression, often neglecting the significance of owner behavior and dog training practices. Additionally, there is lack of understanding regarding how these incidents have evolved over time.
 
-This study investigates data on reported dog bite incidents tfrom 2017 to 2024, focusing on the severity of bites across different breeds and their corresponding trends over the years. We also investigate the geographic distribution of indidents, examining the number of bites reported in various ward area. Additionally, voerviewing the contrasting incidents that occur in public verus private spaces. With this investigation, we seek to discern patterns that may inform future approaches to dog ownership and public policy. A notable gap in existing research is the overemphasis on breed as a determinant of aggression without adequately considering the impact of owner behavior and dog training practices. There is lack of understanding on how incidents are evolving over time.
+Our findings reveal significant trends regarding the severity of attacks associated with various breeds, highlighting shifts from 2017 and 2024. Notably, that there is no consistent trend in incidents per specific breed, suggesting that promoting responsible ownership may be a more effective strategy than breed-specific legislation. We also identify key areas with higher incident rates and provide a comparative analysis of attacks that occur in public versus private settings. These insights are crucial for policymakers, dog owners, and community organizations, as they emphasize the importance of education and responsible ownership in mitigating dog attack incidents.
 
-Our findings reveal significant trends regarding the severity of bites associated with different breeds, highlighting shifts between 2017 and 2024. Noting that there is no acutal trend on incidents per breed, suggesting that focusing on responsible ownership could be a more effective strategy than breed-specific legislation. Additionally, we identify key areas with higher incident rates and provide a comparative analysis of bites occurring in public versus private settings. These insights are crucial for policymakers, dog owners, and community organizations, as they underscore the importance of education and responsible ownership in mitigating dog bite incidents.
+The paper is structured as follows: we begin with a review of relevant literature on dog aggression and breed perception, followed by a detailed description of our dataset and methodologies. We then present our findings regarding breed-specific bite severity, geographic distribution of incidents, and the contrasting contexts of public versus private incidents. Finally, we conclude with recommendations aimed at enhancing dog safety and community awareness. We emphasize that effective solutions must transcend breed categorizations to address the root causes of aggression. Through this analysis, we seek to contribute to a more nuanced understanding of dog aggression that prioritizes responsible ownership over breed-based assumptions.
 
-*The structure of this paper is as follows: we begin with a review of relevant literature on dog aggression and breed stigma, followed by a detailed description of the dataset and methodologies employed. Next, we present our findings and discuss their implications for dog ownership and public policy. Finally, we conclude with recommendations for future research and community initiatives aimed at addressing dog bite incidents in a holistic manner. Through this analysis, we aim to contribute to a more nuanced understanding of dog aggression that prioritizes responsible ownership over breed-based assumptions.*
+# Data
 
-*The paper is structured as follows: we first review the existing literature on dog aggression and breed perceptions, followed by a detailed description of our dataset and methodologies. We then present our findings on breed-specific bite severity, geographic distribution of incidents, and the contrasting contexts of public versus private incidents. Finally, we conclude with recommendations aimed at enhancing dog safety and community awareness, reinforcing the idea that effective solutions must go beyond breed categorizations to address the root causes of aggression. By illuminating these complexities, this study seeks to contribute to a more informed dialogue on dog bite prevention and responsible pet ownership.*
+## Overview
 
--   **Ethical Considerations**: Labeling breeds as "dangerous" can perpetuate stigma and lead to breed-specific legislation (BSL), which may not effectively address the root causes of dog aggression, such as owner behavior and socialization.
+The R programming language [@citeR] were used to simulate and test the data set from Open Data Toronto. Tidyverse, dplry, ggplot2 were used to process the data and generate plots for this paper.
 
--   **Statistical Issues**: Data may be biased due to underreporting of incidents involving non-targeted breeds or misidentification of breeds in incidents. Also, the number of dogs of each breed varies significantly, impacting statistical conclusions.
+The dataset, "Registry of Dogs Subject to and Issued a Dangerous Dog Order" was provided to Open Data Toronto by the City of Toronto. It contains records of dangerous dogs issued from 2017 to present listings of dangerous acts, dealing cases of bites, attacks, act of menacing behavior or a combination of these acts. Key variables in the raw dataset are the date (year, month and day), severity of the attack, breed type (including colour and name of dog), geographic distribution (such as the first three digits of postal codes, ward number, and area), and the location category (public versus private).
 
-#### 3. Data Description and Summary
+For this analysis, we selected the follwing variables in out cleaned dataset: year, breed, ward, bite type, ward area, and location type. By examining these variable, we aim to analyze trends in the severity of attacks over time geographic distribution, and breed type. This breakdown will help us understand how frequent and severity of dog attacks correlate with these factors, making way for future interventions.
 
-The dataset comprises the following key variables:
-
--   **Breed**: The specific dog breed involved in reported incidents.
-
--   **Incident Count**: Number of reported bites or aggressive incidents associated with each breed.
-
--   **Severity of Incidents**: Categorized into minor, moderate, and severe injuries.
-
--   **Owner Characteristics**: Information on the owner's experience, training practices, and history with pets.
-
--   **Geographic Distribution**: Locations where incidents occurred, which can be mapped to assess trends.
-
--   <div>
-
-    #### 4. Data Visualization
-
-    </div>
-
-    **Bar Graph: Incident Count by Breed**
-
-    A bar graph would effectively illustrate the total incident counts for the top breeds, highlighting the most frequently reported cases.
-
-    **Pie Chart: Severity of Incidents**
-
-    A pie chart can show the distribution of injury severity across all breeds, providing insight into the potential danger posed by various breeds.
-
-    #### 5. Statistical Analysis
-
-    -   **Descriptive Statistics**: Calculate means, medians, and standard deviations for incident counts and injury severity levels to summarize the data.
-
-    -   **Correlation Analysis**: Assess the correlation between owner characteristics (e.g., training and experience) and the severity of incidents, revealing potential underlying factors influencing aggressive behavior.
-
-    #### 6. Conclusion
-
-    The analysis of dangerous dog breeds requires a nuanced understanding of the data and its implications. While certain breeds may appear more frequently in reports of aggression, it is crucial to consider factors such as owner behavior, training, and the socialization of dogs. By focusing solely on breed without addressing these aspects, we risk oversimplifying a complex issue that warrants more comprehensive solutions.
-
-    #### 7. Recommendations for Future Research
-
-    -   **Longitudinal Studies**: Investigate the effectiveness of training programs on reducing aggressive behavior in high-risk breeds.
-
-    -   **Owner Education**: Implement initiatives to educate potential dog owners on responsible ownership and socialization practices.
-
-    -   **Policy Review**: Evaluate the impact of breed-specific legislation on dog bite incidents to assess its efficacy and explore alternative approaches to public safety. Statistical Analysis of Dog Bite Incident Dataset Overview of the Dataset
-
-This dataset is crucial for understanding dog bite incidents within urban areas, allowing for targeted interventions and b. It can inform local government, animal control, and public safety organizations about the relationship between dog ownership and public safety.
-
-Similar datasets, such as those from veterinary clinics or animal control agencies, could provide additional context regarding the behavior of dogs and owner education levels. However, this dataset specifically focuses on incidents, making it valuable for assessing outcomes rather than preventative measures.
-
-Bar Graphs: Severity of Incidents: Visual representation of the count of incidents by severity. Incidents by Location: Distribution of incidents across different locations. Pie Charts: Bite Circumstances: Percentage of each severity level relative to total incidents. Heat Maps: Ward Analysis: Heat map showing the concentration of incidents by ward number. Relationships Between Variables
-
-Bite Severity vs. Breed: Analyze if certain breeds have a higher incidence of severe bites using a chi-square test for independence. Bite Severity vs. Location: Use ANOVA to assess if there is a statistically significant difference in bite severity based on the location of the incident. Temporal Trends: Explore whether incidents spike in certain months by creating a time series analysis of the incidents. Conclusion
-
-This dataset provides a foundational view of dog bite incidents in an urban environment, with potential for deep statistical analysis. By understanding the relationships between variables, stakeholders can implement targeted interventions to reduce dog bite incidents and enhance public safety.
-
-Appendices Appendix A: Detailed tables of incidents categorized by breed and severity. Appendix B: Full visualizations of graphs and heat maps. Appendix C: Summary of statistical tests and results. \# Data {#sec-data}
+## Dog Attack Incidents per Year and Breed  {#sec-breed-year}
 
 ```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
+#| label: fig-1
+#| fig-cap: Dangerous Dogs Issued per Year by Severity
 #| echo: false
-library(tidyr)
-library(ggplot2)
-library(readr)
 
-###severity and year
-clean_data <- read_csv("/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/data/dangerous_dog_clean.csv")
 
-severity_summary <- as.data.frame(table(clean_data$year, clean_data$bite_type))
+# Load the cleaned data set
+clean_data <- read_csv("/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/data/dangerous_dog_clean.csv", show_col_types = FALSE)
 
-# Rename columns for better readability
-colnames(severity_summary) <- c("Year", "Severity", "Count")
+# Pick level of severity and year of incident from data set
+severity <- as.data.frame(table(clean_data$year, clean_data$bite_type))
+
+# Rename columns
+colnames(severity) <- c("Year", "Severity", "Count")
 
 # Reshape data for ggplot
-severity_summary_long <- pivot_wider(severity_summary, names_from = Severity, values_from = Count, values_fill = 0)
+severity_graph <- pivot_wider(severity, names_from = Severity, values_from = Count, values_fill = 0)
 
 # Reshape back to long format for stacking
-severity_summary_long <- pivot_longer(severity_summary_long, 
-                                       cols = c("VERY SEVERE", "SEVERE", "NON SEVERE", "NOT A BITE"),
+severity_graph <- pivot_longer(severity_graph, 
+                                       cols = c("VERY SEVERE", "SEVERE", "NON SEVERE", 
+                                                "NOT A BITE"),
                                        names_to = "Severity",
                                        values_to = "Count")
 
-# Print the reshaped data
-print(severity_summary_long)
 
 # Create the stacked bar graph
-ggplot(severity_summary_long, aes(x = Year, y = Count, color = Severity, group = Severity)) +
+ggplot(severity_graph, aes(x = Year, y = Count, color = Severity, group = Severity)) +
   geom_line(size = 1) +  # Add lines
   geom_point(size = 2) + # Add points at each year
-  labs(title = "Dog Bite Incidents by Year and Severity",
-       x = "Year",
-       y = "Count of Incidents",
+  labs(x = "Year",
+       y = "Number of Incidents",
        color = "Severity Level") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_color_manual(values = c("VERY SEVERE" = "red", 
@@ -141,438 +87,175 @@ ggplot(severity_summary_long, aes(x = Year, y = Count, color = Severity, group =
 
 ```
 
-### Observations
-
--   **Trend in Very Severe Incidents**: There was a notable drop to zero in 2020, but numbers have varied between 1 and 5 in subsequent years.
-
--   **Severe Incidents**: There is a peak in 2022 (48) and generally high counts in other years, particularly in 2023 (47).
-
--   **Non-Severe Incidents**: Counts have remained relatively stable, with a peak in 2022 (22).
-
--   **Not a Bite Incidents**: The counts have shown variability, with a peak in 2023 (14).
-
-### Total Counts by Category (2017-2024)
-
--   **Very Severe**: 11
-
--   **Severe**: 161
-
--   **Non Severe**: 111
-
--   **Not a Bite**: 24
-
-### Analysis of Incident Severity Trends (2017-2024)
-
-The dataset encompassing incidents categorized by severity from 2017 to 2024 reveals significant trends and insights into public safety and incident management. Over the observed years, incidents classified as "Very Severe" and "Severe" demonstrate noteworthy fluctuations, suggesting the impact of various external factors on these occurrences.
-
-From 2017 to 2024, the count of very severe incidents varied, with a marked decline to zero in 2020 and a subsequent increase in 2023. This fluctuation may indicate both the effectiveness of interventions during certain years and the presence of underlying conditions that precipitate severe incidents. In contrast, the category of severe incidents peaked dramatically in 2022 with 48 cases, highlighting a critical period where either environmental or situational factors contributed to an increase in severity. However, the total number of incidents reached its highest point in 2023 (87), followed by a significant drop in 2024. This decline may suggest that targeted interventions or changes in public awareness have begun to yield positive results.
-
-A noteworthy observation from the analysis is the strong positive correlation between severe and very severe incidents, indicating that an increase in severe cases often precedes an uptick in very severe incidents. This relationship underscores the importance of addressing severe incidents promptly to prevent escalation, highlighting a need for proactive measures in public safety management.
-
-The variability in total incidents year-over-year points to the influence of external factors, such as policy changes, public awareness campaigns, or environmental conditions. The increase in "Not a Bite" incidents suggests improved public awareness and reporting mechanisms, which is encouraging for understanding the broader context of these incidents.
-
-In conclusion, the data provides critical insights into trends in incident severity, emphasizing the importance of continuous monitoring and targeted interventions. Future strategies should focus on investigating the causes of severe incidents, enhancing public education, and maintaining vigilance to ensure that improvements in safety are sustained. By understanding and addressing the factors contributing to incident severity, stakeholders can work towards a safer environment for all.
+@fig-1 illustrates dog attack incidents from 2017 and 2024, categorized by severity levels: "VERY SEVERE", "SEVERE", "NON SEVERE", and "NOT A BITE". Each severity level is represented by distinct colours, with the x-axis indicating the year and y-axis representing the number of incidents. This line graph highlights the trends and variations in dog attacks over time, facilitating easy comparisons among severity levels. The dataset suggest a count of incidents varied, with a consistent trend between 2017-2021 with a subsequent increase in 2021-2023. Followed by a drop in numbers by 2024, this fluctuation may indicate external factors during that time of period that may have affects the number of incidents.
 
 ```{r}
-##summary of breeds and their severity of bites
-library(dplyr)
-library(knitr)
-
-
-# Load the cleaned data
-clean_data <- read_csv("/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/data/dangerous_dog_clean.csv")
-
-# Summarize the data by Breed
-breed_severity_counts <- clean_data %>%
-  group_by(Breed, bite_type) %>%
-  summarise(incident_count = n(), .groups = 'drop')  # Count incidents
-
-breed_severity_table <- breed_severity_counts %>%
-  pivot_wider(names_from = bite_type, values_from = incident_count, values_fill = 0) %>%
-  arrange(desc(SEVERE))  # Optional: Arrange by severe incidents
-
-kable(breed_severity_table, format = "markdown", 
-      caption = "Summary of Dog Bite Incidents by Breed and Severity")
-
-
-
-```
-
-High-Risk BreedsAmerican Bulldog: Most incidents overall, with the highest number of severe cases.German Shepherd: Significant number of severe incidents, indicating a strong potential for aggression.Rottweiler: Notable severe incidents, though fewer than the American Bulldog and German Shepherd.Low-Risk BreedsBreeds like Labrador Retrievers and Golden Retrievers exhibit low severity ratings, suggesting they may be less prone to severe aggression.Many mixed breeds, particularly those not associated with high-risk breeds, show minimal severe incidents.Severity DistributionSevere vs. Non-Severe: There is a marked distinction between severe and non-severe incidents for certain breeds, highlighting that while some breeds may be more prone to aggression, others are consistently more docile.Mixed Breeds: Some mixed breeds with high-risk lineage (like American Bulldog mixes) still have varied outcomes, suggesting that individual temperament and upbringing play crucial roles.Implications for OwnershipTraining and Environment: The severity of incidents often correlates with training and environment, emphasizing the importance of responsible ownership.Breed Awareness: Potential dog owners should be aware of breed tendencies and consider them when selecting a pet.ConclusionThe data underscores the complexity of dog behavior, where breed tendencies can indicate potential risks but should always be considered alongside individual factors like training, socialization, and the owner's experience.
-
-### Observations on Dog Breed Behavior and Aggression
-
-The data on dog breed incidents reveals significant insights into the propensity for aggression among various breeds. Notably, the **American Bulldog** and **German Shepherd** emerge as the most frequent offenders, with high numbers of severe incidents. This suggests that certain breeds may possess inherent traits that predispose them to aggressive behavior.
-
-Conversely, breeds like **Labrador Retrievers** and **Golden Retrievers** consistently show low severity ratings, indicating a tendency toward gentler behavior. This distinction highlights the importance of breed characteristics when assessing potential risks associated with dog ownership.
-
-The data also underscores the role of environment and training in shaping a dog's behavior. Mixed breeds, especially those with lineage from high-risk breeds, exhibit varied outcomes based on their upbringing. This variability suggests that individual temperament and socialization play crucial roles in a dog’s propensity for aggression.
-
-Ultimately, while breed tendencies can inform potential risks, responsible ownership, including training and proper socialization, is essential in promoting positive behavior. Understanding these dynamics can help prospective dog owners make informed decisions, fostering safer interactions between humans and their canine companions.
-
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
+#| label: fig-2
+#| fig-cap: Comparison of Dog Incidents by Breeds and Severity (2017 vs.2024)
 #| echo: false
 #| warning: false
 #| message: false
 
-###2024 severity of bite per breed
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-library(readr)
-
 # Load the cleaned data
 clean_data <- read_csv("/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/data/dangerous_dog_clean.csv")
 
-# Filter data for the year 2018
-specific_year_data <- clean_data %>%
-  filter(year == 2024)
+# Filter cleaned data for the years 2017 and 2024
+years_data <- 
+  clean_data |>
+  filter(year %in% c(2017, 2024))
 
-# Summarize incidents by breed and severity
-severity_summary <- specific_year_data %>%
-  group_by(Breed, bite_type) %>%
+# Summarize incidents by breed, severity, and year
+breed_severity <- 
+  years_data |>
+  group_by(year, Breed, bite_type) |>
   summarise(Count = n(), .groups = 'drop')
 
-# Print the summary
-print(severity_summary)
 
-# Create the stacked bar graph
-ggplot(severity_summary, aes(x = Breed, y = Count, fill = bite_type)) +
+# Create stacked bar graph
+ggplot(breed_severity, aes(x = Count, y = Breed, fill = bite_type)) +
   geom_bar(stat = "identity", position = "stack") +
-  labs(title = "Dog Bite Incidents by Breed and Severity (per Year)",
-       x = "Dog Breed",
-       y = "Count of Incidents",
+  labs(x = "Number of Incidents",
+       y = "Dog Breed",
        fill = "Severity Level") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 5)) +
+  theme(axis.text.y = element_text(size = 4)) +
   scale_fill_manual(values = c("VERY SEVERE" = "red", 
                                 "SEVERE" = "orange", 
                                 "NON SEVERE" = "green", 
-                                "NOT A BITE" = "blue"))
+                                "NOT A BITE" = "steelblue")) +
+  facet_wrap(~ year)  # This creates separate panels for 2017 and 2024
 
-```
-
-```{r}
-###2017 severity of bites per breed
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-library(readr)
-
-# Load the cleaned data
-clean_data <- read_csv("/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/data/dangerous_dog_clean.csv")
-
-# Filter data for the year 2017
-specific_year_data <- clean_data %>%
-  filter(year == 2017)
-
-# Summarize incidents by breed and severity
-severity_summary <- specific_year_data %>%
-  group_by(Breed, bite_type) %>%
-  summarise(Count = n(), .groups = 'drop')
-
-# Print the summary
-print(severity_summary)
-
-# Create the stacked bar graph
-ggplot(severity_summary, aes(x = Breed, y = Count, fill = bite_type)) +
-  geom_bar(stat = "identity", position = "stack") +
-  labs(title = "Dog Bite Incidents by Breed and Severity (per Year)",
-       x = "Dog Breed",
-       y = "Count of Incidents",
-       fill = "Severity Level") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_manual(values = c("VERY SEVERE" = "red", 
-                                "SEVERE" = "orange", 
-                                "NON SEVERE" = "green", 
-                                "NOT A BITE" = "blue"))
 
 
 
 ```
 
-### Trends in Bite Severity:
+@fig-2 presents a comparison of dog incidents by breed and severity for the years 2017 and 2024 using a stacked bar chart. Each breed is represented along the y-axis, while the x-axis display the number of incidents. The distinct colour codes represent the different severity levels, ranging from "NOT A BITE" to "VERY SEVERE". The chart is divided into two panels for each year, that allows for a clear visual comparison of how incidents have evolved over time. Trends show rise in the severity of dog attack incident from 2017 and 2024, where severe bites in 2017 accounted for 40% of reported incidents and 50% in 2024. We also notice that American Bulldogs have accounted for many cases in 2024, while displaying none in 2017. While on the other hand, German Shepherd have increased in cases of Non-severe attacks and a decrease in severe attacks from 2017 and 2024.
 
-1.  **Increased Severity in Certain Breeds:**
-
-    -   **American Bulldog:** The 2024 data shows a significant number of severe incidents compared to the 2017 data, where similar breeds like the Rottweiler and German Shepherd were prevalent but less prominently reported for severe bites.
-
-    -   **Staffordshire Mix:** Very severe incidents in 2017 indicate a concern, but there’s no direct comparison in 2024 data.
-
-2.  **Overall Severity Counts:**
-
-    -   In 2024, a larger proportion of bites are categorized as severe (17 out of 34) compared to 2017, where severe bites were 10 out of 25. This may suggest an increase in the severity of incidents overall.
-
-### Breed Popularity and Incidents:
-
-3.  **High-Risk Breeds:**
-
-    -   **German Shepherds and Rottweilers:** Both years show these breeds frequently associated with severe incidents. In 2024, they are reported with a mix of severe and non-severe bites, indicating consistent risk.
-
-    -   **Mixed Breeds:** Increased representation of mixed breeds in 2024, such as the American Bulldog mixes, might reflect a growing trend of mixed breeds being involved in serious incidents.
-
-4.  **Emerging Breeds:**
-
-    -   The appearance of breeds like Cane Corso and Belgian Malinois in severe categories in 2024 suggests that these breeds are becoming more common in reports of serious incidents compared to 2017.
-
-### Location Analysis:
-
-5.  **Consistent High-Risk Areas:**
-
-    -   Some areas, like **Scarborough-Rouge Park** in 2017 and **Parkdale-High Park** in 2024, are consistently noted for severe incidents, indicating potential environmental or social factors that contribute to dog aggression in these locations.
-
-### Potential Causes for Changes:
-
-6.  **Awareness and Reporting:**
-
-    -   The increase in reported severe incidents in 2024 may be influenced by heightened awareness and reporting mechanisms in place compared to 2017.
-
-    -   The prevalence of dog ownership during and after the pandemic may have also influenced behavior and bite rates, as more dogs were adopted and possibly less socialized.
-
-### Recommendations Moving Forward:
-
-7.  **Targeted Interventions:**
-
-    -   Programs focused on training and socialization for high-risk breeds can help mitigate future incidents.
-
-    -   Community education on dog behavior and responsible ownership should be prioritized, especially in high-incidence areas.
-
-### Conclusion:
-
-The comparison highlights not only the consistency of certain breeds being involved in severe incidents but also indicates shifts in breed prevalence and bite severity over the years. Further analysis could deepen understanding of the factors influencing these trends.
-
-### 1. **Trends in Bite Severity Over Time:**
-
--   **Increase in Severe Incidents:**
-
-    -   In 2017, severe bites accounted for 10 out of 25 incidents (40%).
-
-    -   In 2024, severe bites rose to 17 out of 34 incidents (50%).
-
-    -   This suggests a rising trend in the proportion of severe bites over the years.
-
-### 2. **Frequency of Certain Breeds:**
-
--   **Consistency in High-Risk Breeds:**
-
-    -   **German Shepherds:** Remain prevalent in both years, showing a mix of severe and non-severe incidents.
-
-    -   **Rottweilers:** Also consistently reported, indicating ongoing concerns about these breeds.
-
-    -   **Emerging Breeds:** The increase in severe incidents involving breeds like the American Bulldog and Cane Corso suggests evolving trends in dog ownership and aggression.
-
-### 3. **Diversity of Breeds:**
-
--   **Mixed Breeds in 2024:**
-
-    -   The increase in mixed breeds involved in severe incidents in 2024 (e.g., American Bulldog mixes) may reflect a growing trend of mixed breed ownership.
-
-    -   This contrasts with 2017, where fewer mixed breeds were reported in severe categories.
-
-### 4. **Locations of Incidents:**
-
--   **High-Risk Areas:**
-
-    -   Locations like Scarborough and Parkdale-High Park appear in both years, indicating persistent risk factors in these neighborhoods.
-
-    -   Changes in community dynamics, such as population growth or increased dog ownership, could be contributing factors.
-
-### 5. **Potential External Influences:**
-
--   **Pandemic Effects:**
-
-    -   The increase in dog ownership during the COVID-19 pandemic may correlate with the rise in severe bites, as many new owners may lack experience in dog training and socialization.
-
--   **Awareness and Reporting Improvements:**
-
-    -   Greater awareness and better reporting practices may lead to an increase in documented incidents, skewing the numbers upward in 2024.
-
-### 6. **Recommendations Based on Time Trends:**
-
--   **Ongoing Monitoring:** Establishing a consistent system for monitoring dog bite incidents to track changes over time and identify emerging trends.
-
--   **Community Programs:** Developing targeted community outreach and education programs based on historical data, particularly in areas with persistent issues.
-
-### Conclusion:
-
-The analysis reveals a notable increase in the severity of dog bite incidents from 2017 to 2024, with certain breeds consistently appearing in severe categories. This underscores the importance of targeted interventions and ongoing monitoring to address these trends effectively. If you need more detailed data visualizations or specific analyses, just let me know!
-
-### Trends in Dog Bite Incidents: A Comparative Analysis of 2017 and 2024 Data
-
-Dog bites are a significant public safety concern, with varying degrees of severity associated with different breeds and circumstances. A comparative analysis of dog bite data from 2017 and 2024 reveals notable trends in severity, breed involvement, and incident locations, highlighting the need for targeted interventions and community awareness.
-
-One of the most striking observations is the increase in severe bite incidents over the seven-year period. In 2017, severe bites constituted 40% of reported incidents, whereas this figure rose to 50% in 2024. This upward trend suggests a growing concern regarding the severity of dog attacks, which may be attributed to various factors, including changes in dog ownership patterns and community dynamics.
-
-Certain breeds have consistently emerged as high-risk, with German Shepherds and Rottweilers remaining prominent in both datasets. Their repeated association with severe incidents indicates ongoing behavioral challenges that warrant further investigation and intervention. Notably, the rise of breeds like the American Bulldog and Cane Corso in severe bite incidents in 2024 suggests an evolving landscape of dog ownership, where previously less prominent breeds are becoming more common and, in some cases, more aggressive.
-
-Another critical aspect of the data is the geographical consistency of high-risk areas. Neighborhoods such as Scarborough and Parkdale-High Park have been recurrently highlighted for severe incidents in both years. This persistence points to potential environmental or social factors contributing to aggression among dogs in these locales. Increased dog ownership, particularly during the COVID-19 pandemic, may have compounded these issues, as many new owners may lack the experience necessary for proper training and socialization of their pets.
-
-Moreover, the rise in mixed breed incidents in 2024 indicates a shift in public attitudes towards adopting mixed breed dogs. As more people welcome these dogs into their homes, the potential for severe bites may rise if appropriate training and socialization are not prioritized. The data suggests a need for educational programs aimed at responsible ownership, particularly for breeds that exhibit aggressive tendencies.
-
-In conclusion, the comparative analysis of dog bite incidents from 2017 to 2024 highlights significant trends that call for immediate attention. The increase in severity, the consistent presence of high-risk breeds, and the persistence of certain locations all point to the need for targeted interventions, community education, and ongoing monitoring. By addressing these issues proactively, we can foster safer environments for both dogs and the communities they inhabit.
+## Dog Attack Incidents per Geographic Area: Private Vs. Public  {#sec-location}
 
 ```{r}
-###number of incidents per ward
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-library(readr)
+#| label: fig-3
+#| fig-cap: Total Cases of Dog Incidents by Geographic Area Between 2017-2024
+#| echo: false
+#| warning: false
+#| message: false
 
-##MAYBE MAKE A MODEL TO SEE THE STATISTICS
 # Load the cleaned data
 clean_data <- read_csv("/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/data/dangerous_dog_clean.csv")
 
-area_counts <- clean_data |>
+# Calculating how many incidents per area from cleaned data
+ward_counts <- clean_data |>
   group_by(ward) |>
   summarise(incident_count = n()) |>
-  arrange(incident_count) |>
-  mutate(percentage = (incident_count/sum(incident_count)) * 100) #calculate percentage
+  arrange(incident_count) |> # List from lowest to highest count
+  mutate(percentage = (incident_count/sum(incident_count)) * 100) #calculate percentage of incident in each ward area
 
-print(area_counts)
-
-# Create the bar plot
-ggplot(area_counts, aes(x = reorder(ward, -incident_count), y = incident_count)) +
+# Create the bar plot with pertentage of counts 
+ggplot(ward_counts, aes(x = reorder(ward, -incident_count), y = incident_count)) +
   geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Incidence of Dog Bites by Geographic Area",
-       x = "Ward Area",
+  labs(x = "Ward Area",
        y = "Number of Incidents") +
   theme_minimal() +
-  coord_flip() +  # Flip coordinates for better readability
+  coord_flip() +  # Flip coordinates
+  theme(axis.text.y = element_text(size = 5)) + 
   geom_text(aes(label = paste0(incident_count, " (", round(percentage, 1), "%)")), 
             position = position_identity(), 
             hjust = -0.01,  # Adjust horizontal position
             color = "red",
             size = 2)  # Add percentage labels
 
-print(area_counts)
-
 ```
 
-### Summary of Dog Bite Incidents by Ward
-
-The analysis of dog bite incidents across various wards reveals notable patterns in occurrence and potential severity.
-
--   **Highest Incidents**: The ward with the highest number of reported dog bite incidents is **Toronto-Danforth**, with **32**incidents (9.00% of the total).
-
--   **Moderate Levels**: Several wards report moderate incident levels, with **Scarborough Southwest** (25 incidents) and **Beaches-East York** (21 incidents) showing significant occurrences.
-
--   **Lower Incidents**: The **No Ward Info** category recorded the fewest incidents, totaling only **2**.
-
-### Insights
-
--   There is a clear geographic variation in the frequency of dog bite incidents, suggesting that certain wards may require targeted interventions or community education to improve dog safety and responsible ownership.
-
--   Understanding whether bite severity varies by location would require further analysis of severity data.
-
-Overall, the data indicates a need for enhanced awareness and potentially tailored strategies in areas with higher incident rates.
+@fig-3 displays the total number of dog incidents across various geographic areas (wards) from 2017 to 2024 using a horizontal bar chart. Each bar represents a ward and its corresponding incident count including a percentage of the total incidents they represent. This design effectively highlight variations in dog incident occurrences across the wards, making it easy to visually compare the data. @fig-3 suggests that Toronto-Danforth accounts for the highest area of dog attack incidents reported with 32 cases in the last 7 years (9%). Along with the next two highest number of reported cases in Scarborough Southwest (7%) and Beaches-East York (5.9%). The correlation of these wards show how closely they are next to each other near south of Toronto.
 
 ```{r}
-###number of incidents per location type
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-library(readr)
+#| label: fig-4
+#| fig-cap: Total Cases of Dog Incidents Public Vs. Private Between 2017-2024
+#| echo: false
+#| warning: false
+#| message: false
 
 # Load the cleaned data
 clean_data <- read_csv("/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/data/dangerous_dog_clean.csv")
 
-# Filter data for the year 2017
-location_counts <- clean_data %>%
-  group_by(location_type) %>%
+# Gather the total number of incidents by location type from cleaned data
+location_counts <- 
+  clean_data |>
+  group_by(location_type) |>
   summarise(incident_count = n())
 
-print(location_counts)
 # Create the bar graph
 ggplot(location_counts, aes(x = reorder(location_type, -incident_count), y = incident_count, fill = location_type)) +
   geom_bar(stat = "identity") +
-  labs(title = "Dog Bite Incidents by Location Type",
+  labs(title = "Dog Attack Incidents by Location Type",
        x = "Location Type",
        y = "Number of Incidents") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "none") # Remove legend if not needed
+        legend.position = "none") 
 
 ```
 
-**Incidents by Location Type**:
-
--   Public Property: 163 incidents (45.7%)
-
--   Other Private Property: 107 incidents (30.0%)
-
--   Park - Leash Required Area: 39 incidents (10.9%)
-
--   Owner's Property: 31 incidents (8.7%)
-
--   Park - Leash Free Area: 17 incidents (4.8%)
-
-<!-- -->
-
--   **Findings**:
-
-    -   A majority of incidents occur in public property (45.7%), which may indicate that this location type needs more focused interventions.
-
-    -   The high number of incidents in "Other Private Property" suggests a need for better awareness or fencing in such areas.
-
--   **Recommendations**:
-
-    -   Implement dog safety education in areas with high incidents.
-
-    -   Consider leash laws or enforcement in public areas where incidents are high.
-
-If you’d like to dive deeper into any specific area or require further calculations, let me know!
+@fig-4 compares the total number of dog incidents that occurred in public versus private locations from 2017 to 2024 using a vertical bar chart. Each bar representing a location type-public or private-along with its corresponding incident count. The bars are colour-coded by location type and are arranged to clearly emphasize the differences in incident frequency. This graph effectively highlights how the setting of these incidents varies, providing valuable insight into where dog attacks are more prevalent. The data reveals a significant number of 163 incidents occurring in public spaces, which include parks-39 incidents in leash-required parks and 17 in leash-free zones. In contrast, private properties account for 107 incidents, with an additional 31 incidents occurring on the owner's property. This brings the totals to 219 attacks (61.4%) in public spaces compared to 138 (38.6%) in private properties. The stark contrast of numbers show us that public spaces need more attention when implementing future measures.
 
 # Discussion
 
-## First discussion point {#sec-first-point}
+## Trends In Dog Attack Incidents: Breed Influence Over Time {#sec-first-point}
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this.
-
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
-
-\newpage
-
-\appendix
-
-# Appendix {.unnumbered}
-
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows...
+A comparative analysis of dog bite data from 2017 to 2024 in @sec-breed-year reveals significant shifts in the severity of incidents over the years and the involvement of specific breeds. One prominent trend identified in @fig-1, is the increasing severity of dog attack incidents over the years. This escalation may be linked to evolving patterns in dog ownership, particularly during and after the pandemic. The significant spike in severe incidents, especially noted in 2022, underscores a critical period that was likely exacerbated by heightened stress and reduced socialization opportunities for dogs during the pandemic lock down in 2020-2021. Notably, @fig-1 illustrates a sharp rise in severe attacks between 2021 and 2022, peaking at 28 cases in 2022 and remaining notably high in subsequent years, particularly in 2023 with 47 cases. This highly suggest that pandemic-related factors heavily influenced dog behavior, as the inability to socialize dogs during that time may have increased the likelihood of aggressive incidents. While from 2023 and 2024, followed by a significant drop, this decline may suggest that there were targeted interventions and increased public awareness that ma have begun to yield positive results. This year-to-year variability in total incidents point from the influence of external factors such as enviromental conditions.
 
 ```{r}
-#| eval: true
+#| label: tbl-breed-severity
+#| tbl-cap: Comparison of Severity of Attacks by Breed
 #| echo: false
-#| message: false
 #| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
 
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
+# Load cleaned data
+clean_data <- read_csv("/Users/sarahlee/Documents/STA304/dangerous_dogs/dangerous_dogs/data/dangerous_dog_clean.csv")
 
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
+# Summarize the data by Breed
+breed_severity <- 
+  clean_data |>
+  group_by(Breed, bite_type) |>
+  summarise(incident_count = n(), .groups = 'drop')  # Count incidents
+
+table <- 
+  breed_severity |>
+  pivot_wider(names_from = bite_type, values_from = incident_count, values_fill = 0) |>
+  arrange(desc(SEVERE))  # Arrange by severe incidents
+
+# Make the table
+table |>
+  slice_head(n = 10) |> #show first 10 row
+  kable(format = "markdown")
+
 ```
+
+On the other hand, when examining dog breeds, a key question arises: which breeds are more prone to aggressive behavior? Based on our data @tbl-breed-severity, certain breeds have consistently been linked to severe attack incidents, notably German Shepherds and Rottweilers. In @fig-2, data from 2017 indicates that these breeds are frequently associated with severe incidents, reflecting ongoing behavioural challenges that necessitate targeted training and awareness initiatives. By 2024, these breeds are reported with a mic of severe and non-severe attacks, underscoring a consistent risk.
+
+Interestingly, breeds such as the American Bulldog, Cane Corso, Belgian Malinois have begun to emerging, appearing more frequently in severe attack categories in @fig-2. This shift not only highlights change in breed popularity but also raises concerns about the temperment and socialization of these breeds. With a need for re-evaluation of public preceptions and training practives. Hence, labeling breeds as "dangerous" can perpetuate stigma and lead to ineffective breed-specific legislation and may not address the root causes of dog aggression.Additionally, it also suggests that breed type is irrelevent in canine aggression, as they only started to emerge aggression in later years. In 2024, mixed breeds, such as the American Bulldog mixes have shown a notable rise in severe incidents. Once again reflecting the growing acceptance and adoption of mixed breeds, yet also highlighting the importance of responsible ownership. Comparing the two years in @fig-2 suggest that 50% of reports were categorized as severe in 2024, while 40% in 2017. It’s worth noting that the high-risk breeds identified are predominantly medium to large dogs. Although smaller breeds like the Maltese appear on the list, their severity levels are considerably lower. This suggests that larger dogs pose a greater threat to public safety, though smaller dogs can still be a concern in certain contexts. Overall, high-risk breeds such as the American Bulldog, German Shepherd, and Rottweiler demonstrate a persistent association with severe incidents, also indicated in @tbl-breed-severity.
+
+In conclusion, the comparative analysis of dog bite incidents from 2017 to 2024 reveals significant trends that call for immediate attention. The increase in severity, and the consistent presence of high-risk breeds all point to the necessity for targeted interventions, community education, and ongoing monitoring. By addressing these issues, we can foster safer environments for both dogs and the communities they inhabit.In conclusion, the comparative analysis of dog bite incidents from 2017 to 2024 highlights significant trends that call for immediate attention.
+
+## Trends In Dog Attack Incidents: Location
+
+The analysis of dog attack incidents across various wards in the Toronto area reveals significant geographic variations in both occurrence and potential severity. Understanding these patterns is crucial for developing targeted interventions that enhance community safety and promote responsible dog ownership.
+
+As shown in @sec-location, @fig-3, the ward with the highest number of reported dog incidents is Toronto-Danforth, with 32 incidents, accounting for 9% of the total. Scarborough Southwest and Beaches-East York follow, reporting 25 (7%) and 21 (5.9%) incidents respectively. This concentration of incidents indicate that areas in South of Toronto are in need for enhanced community education and targeted safety programs. The data clearly identifies high-risk zones, sugessing persistent environmental or social factors contributing to dog aggression. Furthermore, the analysis emphazises the importance of geographcical context in addressing public safety concerns. of dog bite incidents by ward underscores the importance of geographic context in addressing public safety concerns. By identifying high-risk areas and understanding the factors contributing to dog aggression, stakeholders implement targeted strategies to foster safer communities. Enhancing awareness, promoting responsible ownership, and establishing effective training programs are essential steps toward reducing the incidence and severity of dog attacks across Toronto.
+
+While we have identified high-risk areas, it is also important to consider the settings of where these attacks occur. @fig-4 show that 61.4% of incidents take place in public spaces including parks (leash-required and leash-free), indicating a need for heightened safety measures in public. Notably, incidents are more frequent in public areas where leashes are required (10.9%) compared to leash-free zones (4.8%). This discrepancy suggest a need for figuring out what factors suggest canine aggression when leashed rather than being leash free. Additionally, a significant 30% of incidents occur on "Other Private Property," highlighting the need for increased awareness around responsible pet ownership and proper fencing in these areas. While incidents occurring on the owner's property account for 8.7% of the total. While public areas report more incidents overall, the significance of attacks in private settings should not be overlooked.
+
+The analysis of dog bite incidents underscores the necessity of understanding geographic context in public safety. By pinpointing high-risk areas and recognizing the contributing factors to dog aggression, stakeholders can implement targeted strategies to create safer communities. Enhancing awareness, promoting responsible ownership, and establishing effective training programs are essential steps to reduce the incidence and severity of dog bites across Toronto.
+
+## Weaknesses and Next Steps
+
+A significant gap in the current analysis is the lack of detailed data regarding the severity of incidents by location and breed type. While the overall counts provide a snapshot of occurrences, understanding how severity varies within specific wards and breeds is crucial for informing targeted interventions. For instance, high-frequency areas like Toronto-Danforth may require different strategies based on the severity of incidents reported, there are no other external that indicate what resources are in need for efficiently addressing the challenge. Moreover, although we see a emergence of certain breeds such as the American bulldog associated with severe incidents of attacks, we do not know the cause of which may have led this. It could be from the lack of social exposure, lack of training, breed tendencies, or environmental factors. The prevalence of dog ownership during and after the pandemic may have also influenced behavior and bite rates, as more dogs were adopted and possibly less socialized.
+
+Another notable weakness lies in the inconsistency in reporting mechanisms for dog bite incidents. The variability in reported incidents suggests that not all occurrences are being documented, particularly in private settings. The increase in reported severe incidents in @fig-1 from 2017 and 2024 may have been influencd by heightended awareness and reporting mechanisms in place. Improved awareness and accessibility for residents to report incidents could enhance data accuracy and comprehensiveness, enabling more effective responses from local authorities.
+
+Moreover, there is also a noticeable gap in community engagement and education surrounding responsible dog ownership. Although the data indicates a need for targeted interventions, there are insufficient ongoing programs aimed at educating residents about dog behavior, training, and safety measures. Without active community participation, initiatives may lack effectiveness and fail to address the root causes of aggression. Fostering a culture of responsible pet ownership through community-driven programs could help mitigate risks associated with dog bites.
+
+Lastly, the analysis reveals a weak emphasis on the environmental and social factors that contribute to dog aggression in high-risk areas. Factors such as neighborhood dynamics, population density, and public space management play critical roles in shaping dog behavior and the prevalence of bite incidents. Addressing these broader social influences is essential for developing comprehensive strategies that extend beyond individual dog training to encompass community-level interventions. Integrating these considerations into future plans could lead to more sustainable solutions for reducing dog bites. The data underscores the complexity of dog behavior, where breed tendencies can indicate potential risks, but individual factors like training, socialization, and owner experience play crucial roles. Understanding these dynamics can empower prospective dog owners to make informed decisions, fostering safer interactions between humans and their canine companions.
 
 \newpage
 
