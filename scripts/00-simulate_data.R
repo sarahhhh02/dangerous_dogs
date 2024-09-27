@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Simulates... [...UPDATE THIS...]
+# Purpose: Simulates number of dog attacks in Toronto by severity, location and year
 # Author: Sarah Lee
 # Date: 26 September 2024
 # Contact: sarahhhh.lee@mail.utoronto.ca
