@@ -1,11 +1,12 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from opendatatoronto
+# Purpose: Downloads and saves the data from Open Data Toronto
 # Author: Sarah Lee
 # Date: 24 September 2024 
 # Contact: sarahhhh.lee@mail.utoronto.ca
 # License: MIT
 
 #### Workspace setup ####
+install.packages(opendatatoronto)
 library(opendatatoronto)
 library(tidyverse)
 library(dplyr)
